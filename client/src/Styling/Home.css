@@ -1,0 +1,11 @@
+.button{
+    margin-top:300px;
+}
+
+.homepg{
+    width: 100vw;
+    height:100vh;
+    background-image: url('./Pictures/3.jpeg');
+    background-repeat: none;
+    background-size: cover;
+}
