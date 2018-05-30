@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 import Landing from './Landing';
 import Home from './Home';
-import Locate from './users/RegisterUser';
+import Locate from './Locate';
 
 class App extends Component {
   render() {

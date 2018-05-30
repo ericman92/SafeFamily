@@ -1,27 +1,94 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Map from './Map';
+import { Grid, Row, Col, Modal, Button } from 'react-bootstrap';
+import axios from 'axios';
 
-import './Styling/Landing.css';
-import { Grid, Row, Col } from 'react-bootstrap';
 
-class Locate extends Component {
-    state = {
-        response: ''
-    };
+class Locate extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            usernameInput: "",
+            passwordInput: "",
+            message: "",
+            loggedIn: false
+        }
+    }
 
+    handleUsernameChange = (e) => {
+        this.setState({
+            usernameInput: e.target.value
+        });
+    }
+
+    handlePasswordChange = (e) => {
+        this.setState({
+            passwordInput: e.target.value
+        })
+    }
+
+    submitForm = () => {
+        const { usernameInput, passwordInput } = this.state;
+
+        axios
+            .post("/users/login", {
+                username: usernameInput,
+                password: passwordInput
+            })
+            .then((res) => {
+                console.log('hi eric', res.data)
+                this.setState({
+                    loggedIn: true,
+                    message: "Login Success"
+                })
+
+            })
+            .catch((err) => {
+                console.log('is the error?' + err)
+                this.setState({
+                    usernameInput: "",
+                    passwordInput: "",
+                    message: "Username / Password Incorrect."
+                })
+            })
+    }
+
+    logout = () => {
+        axios.post('/users/logout')
+            .then((res) => {
+                this.props.removeUser();
+                this.props.toggleLogin();
+                this.setState({
+                    usernameInput: "",
+                    passwordInput: "",
+                    message: res.data
+                })
+            })
+            .catch((res) => {
+                this.setState({
+                    message: "Please log in first."
+                })
+            })
+    }
 
     render() {
         return (
-            <Grid className="App">
+            <Grid className = 'mappg'>
                 <Row>
-                    <Col xs={18} md={12} lg={12}>
-                        <Link to="/home" className="App-title"> <h1>Welcome to SafeFamily</h1></Link>
+                    <Col className='map'>
+                        <Map />
+                    </Col>                
+                </Row>
+                <Row>
+                    <Col className='group'>
+                    </Col>
+                    <Col className=''>
                     </Col>
                 </Row>
-                {/* <p className="App-intro">{this.state.response}</p> */}
             </Grid>
-        );
+        )
     }
 }
 
-export default Locate;
+export default Locate
