@@ -8,5 +8,6 @@ const { loginRequired } = require("../auth/helpers");
 router.post('/new', db.createUser);
 router.post('/login', passport.authenticate("local", {}), db.loginUser);
 router.post('/logout', loginRequired, db.logoutUser);
-
+router.post('/update', db.updateLocation);
+router.get('/displayGroup', db.displayGroup)
 module.exports = router;

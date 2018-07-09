@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Route , Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 
 class LoginUser extends React.Component {
   constructor() {
@@ -8,6 +8,8 @@ class LoginUser extends React.Component {
     this.state = {
       usernameInput: "",
       passwordInput: "",
+      lastLong: "",
+      lastLat: "",
       message: "",
       loggedIn: false
     }
@@ -33,6 +35,7 @@ class LoginUser extends React.Component {
         username: usernameInput,
         password: passwordInput
       })
+
       .then((res) => {
         console.log('hi eric', res.data)
         this.setState({
@@ -42,13 +45,15 @@ class LoginUser extends React.Component {
 
       })
       .catch((err) => {
-        console.log('is the error?' + err)
+        console.log('is this the error?' + err)
         this.setState({
           usernameInput: "",
           passwordInput: "",
           message: "Username / Password Incorrect."
         })
       })
+
+      
   }
 
   logout = () => {
@@ -85,7 +90,7 @@ class LoginUser extends React.Component {
           <input type="text" value={usernameInput} onChange={this.handleUsernameChange}/>
 
           Password:
-          <input type="password" value={passwordInput} onChange={this.handlePasswordChange}/>
+          <input type="password" value={passwordInput} onChange={this.handlePasswordChange} onSubmit={this.submitForm}/>
 
           <button onClick={this.submitForm}>Login</button>
 
@@ -94,7 +99,11 @@ class LoginUser extends React.Component {
       )
     } else {
       return (
-        <Redirect to="/map" />
+        <Redirect to={{
+          pathname: '/map',
+          state: {account: this.state}   
+        }}
+          />
       )}
   }
 }

@@ -14,7 +14,7 @@ class Landing extends Component {
             <Grid className="landingpg">
                 <Row>
                     <Col className='Enter' xs={18} md={12} lg={12} mdOffset-6>
-                        <Link to="/home" className="App-title"> <h1>Welcome to SafeFamily</h1></Link>
+                        <Link to="/home" className="App-title"> <h1>Welcome to Safe Family</h1></Link>
                     </Col>
                 </Row>
                 {/* <p className="App-intro">{this.state.response}</p> */}

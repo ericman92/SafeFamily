@@ -11,8 +11,8 @@ CREATE TABLE groups (
 CREATE TABLE users (
     id SERIAL PRIMARY KEY UNIQUE,
     username VARCHAR,
-    fname VARCHAR,
-    lname VARCHAR,
+    firstname VARCHAR,
+    lastname VARCHAR,
     password_digest VARCHAR,
     age VARCHAR,
     email VARCHAR UNIQUE,    
@@ -21,9 +21,11 @@ CREATE TABLE users (
     lastLong DECIMAL,
     lastLat DECIMAL
 );
+INSERT INTO groups (id) VALUES (1);
+INSERT INTO groups (id) VALUES (2);
 
-INSERT INTO users (fname, username, lname, password_digest, age, email, phone, lastLong, lastLat)
-  VALUES ('Alex', 'ericman', 'Long', 'password', '18', 'testing@gmail.com', '(718) 123-1234', '40.7429595', '-73.9441155');
+INSERT INTO users (firstname, username, lastname, password_digest, age, email, phone, lastLong, lastLat, group_id)
+  VALUES ('Alex', 'user1 ', 'Long', 'password', '18', 'testing@gmail.com', '(718) 123-1234', '40.731166', '-73.951434', 1);
 
-INSERT INTO users (fname, username, lname, password_digest, age, email, phone, lastLong, lastLat)
-  VALUES ('Bob', 'ericman1', 'Smith', 'password', '10', 'testing1@gmail.com', '(347) 321-5432', '40.7429595', '-73.9441155');
+INSERT INTO users (firstname, username, lastname, password_digest, age, email, phone, lastLong, lastLat, group_id)
+  VALUES ('Bob', 'user2', 'Smith', 'password', '10', 'testing1@gmail.com', '(347) 321-5432', '40.7429595', '-73.9441155', 1);
